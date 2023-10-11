@@ -1,6 +1,5 @@
 package lib;
 
-//import io.github.bonigarcia.wdm.WebDriverManager;
 import helpers.UrlHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -37,11 +36,13 @@ public class DriverFactory {
         options.addArguments("--no-sandbox");
         options.addArguments("--remote-allow-origins=*");
 
-        //In docker tegen grid
-        return new RemoteWebDriver(UrlHelper.createURL("http://selenium-hub:4444"), options);
-
-        //Lokaal tegen grid
-        //return new RemoteWebDriver(UrlHelper.createURL("http://localhost:4444"), options);
+        if(System.getenv("CICD") != null){
+            //In docker tegen grid
+            return new RemoteWebDriver(UrlHelper.createURL("http://selenium-hub:4444"), options);
+        }else{
+            //Lokaal tegen grid
+            return new RemoteWebDriver(UrlHelper.createURL("http://localhost:4444"), options);
+        }
     }
 
     private static WebDriver createChromeBrowser() {

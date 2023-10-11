@@ -13,8 +13,7 @@ public class TestShopScenario {
 
     @BeforeEach
     public void setUp() {
-        System.out.println(System.getenv());
-        System.out.println("FirstParallelUnitTest first() start => " + Thread.currentThread().getName());
+        System.out.println("FirstParallelUnitTest first() start => " + Thread.currentThread().getId());
 
         // Create a new instance of the Chrome driver, grid or local is based on the env var
         if(System.getenv("GRID") != null) {

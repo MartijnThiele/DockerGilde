@@ -1,0 +1,16 @@
+version: "3"
+
+networks:
+  gilde-network:
+
+services:
+
+  gilde-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gilde-tests
+    volumes:
+      - ./target:/docker-gilde/target
+    networks:
+      - gilde-network

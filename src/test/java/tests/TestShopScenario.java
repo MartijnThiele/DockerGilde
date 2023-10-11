@@ -1,22 +1,27 @@
 package tests;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import lib.DriverFactory;
 
-//Main scenario outline for every blog test
+//Main scenario outline for every testshop test
 public class TestShopScenario {
-
 
     protected WebDriver driver;
 
-
-    @BeforeMethod
+    @BeforeEach
     public void setUp() {
+        System.out.println(System.getenv());
+        System.out.println("FirstParallelUnitTest first() start => " + Thread.currentThread().getName());
 
-        // Create a new instance of the Chrome driver
-        driver = DriverFactory.createBrowser(DriverFactory.Browser.CHROME);
+        // Create a new instance of the Chrome driver, grid or local is based on the env var
+        if(System.getenv("GRID") != null) {
+            driver = DriverFactory.createBrowser(DriverFactory.Browser.GRID_CHROME);
+        }else{
+            driver = DriverFactory.createBrowser(DriverFactory.Browser.CHROME);
+        }
 
         //Maximize the window
         driver.manage().window().maximize();
@@ -25,7 +30,7 @@ public class TestShopScenario {
         driver.get("https://testshop.polteq-testing.com/");
     }
 
-    @AfterMethod
+    @AfterEach
     public void tearDown() {
         // Close the browser
         driver.quit();

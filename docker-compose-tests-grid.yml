@@ -1,0 +1,18 @@
+version: "3"
+
+networks:
+  gilde-network:
+
+services:
+  gilde-tests:
+    environment:
+      - GRID=true
+      - PARALLEL=true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gilde-tests
+    volumes:
+      - ./target:/docker-gilde/target
+    networks:
+      - gilde-network

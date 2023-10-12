@@ -5,6 +5,7 @@
 ⚙️️ Openen en in de kantlijn bij regel 10 op de groene vinkjes klikken  
 ⚙️️ Indien er een foutmelding komt over de verkeerde JDK, dan kun je intelliJ JDK 17 laten downloaden  
 ⚙️️ 2 testen slagen, eentje faalt  
+⚙️️ Voer een maven clean uit of verwijder de target folder handmatig
 
 ## Java project in docker draaien
 👁️‍🗨️ slide 6 - Waarom docker  
@@ -21,21 +22,24 @@
 👁️‍🗨️ slide 10 - Docker basics - shared volumes  
 ### Container met shared volume bouwen om testresultaten te behouden na verwijderen
 ⚙️ Container runnen met volume gebaseerd op eerder gebouwd image:  
-`CMD: docker run -v %cd%/target:/docker-gilde/target --rm polteq/dockerdagavond:v1`  
-`PS/LINUX: docker run -v $(PWD)/target:/docker-gilde/target --rm polteq/dockerdagavond:v1`  
+`CMD: docker run -v %cd%/target:/docker-gilde/target polteq/dockerdagavond:v1`  
+`PS: docker run -v ${PWD}/target:/docker-gilde/target polteq/dockerdagavond:v1`   
+`LINUX: docker run -v $(PWD)/target:/docker-gilde/target polteq/dockerdagavond:v1`  
 ⚙️  target folder openen vanuit het project in intelliJ
 
 ## Test fixen en opnieuw runnen
 ⚙️ In LoginTest.java, verander regel 34 in  
 `authenticationPage.login("t3ster@test.com", "1qazxsw2");`  
 ⚙️ Container opnieuw runnen:   
-`CMD: docker run -v %cd%/target:/docker-gilde/target --rm polteq/dockerdagavond:v1`  
-`PS/LINUX: docker run -v $(PWD)/target:/docker-gilde/target --rm polteq/dockerdagavond:v1`  
+`CMD: docker run -v %cd%/target:/docker-gilde/target polteq/dockerdagavond:v1`  
+`PS: docker run -v ${PWD}/target:/docker-gilde/target polteq/dockerdagavond:v1`  
+`LINUX: docker run -v $(PWD)/target:/docker-gilde/target polteq/dockerdagavond:v1`  
 ⚙️ Gaat nog steeds fout omdat image niet opnieuw gebouwd is na code change  
 ⚙️ Image opnieuw bouwen: `docker build -t polteq/dockerdagavond:v1 .`  
 ⚙️ Container opnieuw runnen:  
-`CMD: docker run -v %cd%/target:/docker-gilde/target --rm polteq/dockerdagavond:v1`  
-`PS/LINUX: docker run -v $(PWD)/target:/docker-gilde/target --rm polteq/dockerdagavond:v1`
+`CMD: docker run -v %cd%/target:/docker-gilde/target polteq/dockerdagavond:v1`  
+`PS: docker run -v ${PWD}/target:/docker-gilde/target polteq/dockerdagavond:v1`  
+`LINUX: docker run -v $(PWD)/target:/docker-gilde/target polteq/dockerdagavond:v1`  
 
 ## Java tests parallel runnen in docker
 👁️‍🗨️ Slide 11 - Tests parallel runnen  
@@ -45,11 +49,13 @@
   `junit.jupiter.execution.parallel.mode.default = concurrent`  
 ⚙️ Image opnieuw bouwen: `docker build -t polteq/dockerdagavond:v1 .`  
 ⚙️ Container opnieuw runnen:  
-`CMD: docker run -v %cd%/target:/docker-gilde/target --rm polteq/dockerdagavond:v1`  
-`PS/LINUX: docker run -v $(PWD)/target:/docker-gilde/target --rm polteq/dockerdagavond:v1`  
+`CMD: docker run -v %cd%/target:/docker-gilde/target polteq/dockerdagavond:v1`  
+`PS: docker run -v ${PWD}/target:/docker-gilde/target polteq/dockerdagavond:v1`  
+`LINUX: docker run -v $(PWD)/target:/docker-gilde/target polteq/dockerdagavond:v1`  
 ⚙️ Instabiel? Page crashes? Shared memory verhogen kan dit oplossen:  
-`CMD: docker run --shm-size=2g -v %cd%/target:/docker-gilde/target --rm polteq/dockerdagavond:v1`  
-`PS/LINUX: docker run --shm-size=2g -v $(PWD)/target:/docker-gilde/target --rm polteq/dockerdagavond:v1`
+`CMD: docker run -v %cd%/target:/docker-gilde/target polteq/dockerdagavond:v1`  
+`PS: docker run -v ${PWD}/target:/docker-gilde/target polteq/dockerdagavond:v1`  
+`LINUX: docker run -v $(PWD)/target:/docker-gilde/target polteq/dockerdagavond:v1`
 
 ## Java project in docker parallel tegen selenium grid
 👁️‍🗨️ slide 12 Selenium grid  

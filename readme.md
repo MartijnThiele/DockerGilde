@@ -31,7 +31,7 @@
 ⚙️ Container opnieuw runnen:   
 `CMD: docker run -v %cd%/target:/docker-gilde/target --rm polteq/dockerdagavond:v1`  
 `PS/LINUX: docker run -v $(PWD)/target:/docker-gilde/target --rm polteq/dockerdagavond:v1`  
-⚙️ Gaat nog steeds fout omdat image niet opnieuw gebouws is na code change  
+⚙️ Gaat nog steeds fout omdat image niet opnieuw gebouwd is na code change  
 ⚙️ Image opnieuw bouwen: `docker build -t polteq/dockerdagavond:v1 .`  
 ⚙️ Container opnieuw runnen:  
 `CMD: docker run -v %cd%/target:/docker-gilde/target --rm polteq/dockerdagavond:v1`  
